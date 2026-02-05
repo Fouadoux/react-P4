@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        anton: ['Anton', 'sans-serif'],
-        manrope: ['Manrope', 'sans-serif'],
+        anton: ['var(--font-anton)', 'sans-serif'],
+      manrope: ['var(--font-manrope)', 'sans-serif'],
       },
     },
   },

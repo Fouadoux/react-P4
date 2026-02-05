@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SearchBar from "../SearchBar/SearchBar";
+import { anton } from '@/app/fonts'  
 
 export default function Header() {
 
@@ -37,7 +38,7 @@ export default function Header() {
         />
       </div>
       <div className="absolute z-20 flex flex-row items-center left-[275px] top-[245px] ">
-        <p className="font-anton text-center text-[44px] leading-[66px] text-[#FFD15B] font-bold  ">
+        <p className={`${anton.className} text-center text-[44px] leading-[66px] text-[#FFD15B] font-bold`}>
           DÉCOUVREZ NOS RECETTES<br />
           DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES
         </p>

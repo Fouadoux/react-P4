@@ -1,10 +1,16 @@
 "use client"
 import RecipeCard from '@/components/RecipeCard/RecipeCard'
-import { useState } from "react"
+import { useState, useEffect  } from "react"
 
 
-export default function RecipeList({ recipes }) {
+ export default function RecipeList({ recipes }) {
     const [currentPage, setCurrentPage] = useState(1)
+    const [isClient, setIsClient] = useState(false)
+    useEffect(() => {
+    setIsClient(true)
+  }, [])
+  
+  if (!isClient) return null
     const recipesPerPage = 9
     const lastIndex = currentPage * recipesPerPage
     const firstIndex = lastIndex - recipesPerPage

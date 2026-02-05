@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { manrope } from '@/app/fonts'
 
 export default function RecipeCard({ recipe }) {
   return (
@@ -18,14 +19,14 @@ export default function RecipeCard({ recipe }) {
           
           {/* Badge temps */}
           <div className="absolute top-[21px] right-[22px] w-[63px] h-[26px] bg-[#FFD15B] rounded-[14px] flex items-center justify-center">
-            <span className="font-manrope text-xs text-[#1B1B1B] text-center">
+            <span className={`${manrope.className}   text-xs text-[#1B1B1B] text-center`}>
               {recipe.time}min
             </span>
           </div>
         </div>
 
         {/* Titre de la recette */}
-        <h3 className="absolute left-[25px] top-[285px] font-anton text-lg leading-[27px] text-black">
+        <h3 className={`${manrope.className} font-bold absolute left-[25px] top-[285px] font-anton text-lg leading-[27px] text-black`}>
           {recipe.name}
         </h3>
 
@@ -34,17 +35,17 @@ export default function RecipeCard({ recipe }) {
           
           {/* Section RECETTE */}
           <div className="flex flex-col gap-[10px] w-[330px]">
-            <h4 className="font-manrope font-bold text-xs leading-4 tracking-[0.09em] uppercase text-[#7A7A7A]">
+            <h4 className={`${manrope.className} font-bold text-xs leading-4 tracking-[0.09em] uppercase text-[#7A7A7A]`}>
               Recette
             </h4>
-            <p className="font-manrope text-sm leading-[19px] text-[#1B1B1B] w-[330px] line-clamp-4 ">
+            <p className={`${manrope.className} text-sm leading-[19px] text-[#1B1B1B] w-[330px] line-clamp-4`}>
               {recipe.description}
             </p>
           </div>
 
           {/* Section INGRÉDIENTS */}
           <div className="flex flex-col gap-[10px] w-[330px]">
-            <h4 className="font-manrope font-bold text-xs leading-4 tracking-[0.09em] uppercase text-[#7A7A7A]">
+            <h4 className={`${manrope.className} font-bold text-xs leading-4 tracking-[0.09em] uppercase text-[#7A7A7A]`}>
               Ingrédients
             </h4>
             
@@ -53,12 +54,12 @@ export default function RecipeCard({ recipe }) {
               {recipe.ingredients.map((ing, index) => (
                 <div key={index} className="flex flex-col">
                   {/* Nom de l'ingrédient */}
-                  <span className="font-manrope font-medium text-sm leading-[19px] text-[#1B1B1B]">
+                  <span className={`${manrope.className}  font-medium text-sm leading-[19px] text-[#1B1B1B]`}>
                     {ing.ingredient}
                   </span>
                   {/* Quantité + unité */}
                   {(ing.quantity || ing.unit) && (
-                    <span className="font-manrope text-sm leading-[19px] text-[#7A7A7A]">
+                    <span className={`${manrope.className} text-sm leading-[19px] text-[#7A7A7A]`}>
                       {ing.quantity && `${ing.quantity}`}
                       {ing.unit && ` ${ing.unit}`}
                     </span>
