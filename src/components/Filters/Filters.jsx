@@ -1,65 +1,96 @@
 "use client"
-import { useEffect, useState } from 'react'
 import FilterDropdown from '@/components/FilterDropdown/FilterDropdown'
+import FilterTag from '@/components/FilterTag/FilterTag'
 
-export default function Filters({ recipes }) {
-    const [selectedIngredient, setSelectedIngredient] = useState('')
-const [selectedAppliance, setSelectedAppliance] = useState('')
-const [selectedUstensil, setSelectedUstensil] = useState('')
-
-const allIngredients = recipes
-  .flatMap(r => r.ingredients.map(ing => ing.ingredient))
-
-const ingredientsMap = new Map()
-allIngredients.forEach(ing => {
-  const key = ing.trim().toLowerCase()
-  if (!ingredientsMap.has(key)) {
-    ingredientsMap.set(key, ing.trim())
+export default function Filters({
+  recipes,
+  selectedIngredient,
+  setSelectedIngredient,
+  selectedAppliance,
+  setSelectedAppliance,
+  selectedUstensil,
+  setSelectedUstensil
+}) {
+  // Fonction pour capitaliser
+  const capitalize = (str) => {
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
   }
-})
 
-const uniqueIngredients = Array.from(ingredientsMap.values())
+  // Ingrédients
+  const allIngredients = recipes.flatMap(r =>
+    r.ingredients.map(ing => ing.ingredient.trim())
+  )
+  const uniqueIngredients = [...new Set(
+    allIngredients.map(ing => capitalize(ing))
+  )].sort()
 
-const allAppliances = recipes.map(r => r.appliance)
-const uniqueAppliances = [...new Set(allAppliances)]
+  // Appareils
+  const allAppliances = recipes.map(r => r.appliance.trim())
+  const uniqueAppliances = [...new Set(
+    allAppliances.map(app => capitalize(app))
+  )].sort()
 
-const allUstensils = recipes.flatMap(r => r.ustensils)
-const uniqueUstensils = [...new Set(allUstensils)]
+  // Ustensiles
+  const allUstensils = recipes.flatMap(r =>
+    r.ustensils.map(u => u.trim())
+  )
+  const uniqueUstensils = [...new Set(
+    allUstensils.map(ust => capitalize(ust))
+  )].sort()
 
-const handleSelectIngredient = (ingredient) => {
-  setSelectedIngredient(ingredient)  
-}
+  return (
+    <div className="w-full max-w-[1440px] mx-auto px-8 py-6">
+      {/* Les 3 dropdowns */}
+      <div className="flex gap-4">
+        <FilterDropdown
+          label="Ingrédients"
+          options={uniqueIngredients}
+          selected={selectedIngredient}
+          onSelect={setSelectedIngredient}
+        />
 
-const handleSelectAppliance = (appliance) => {
-  setSelectedAppliance(appliance)
-}
+        <FilterDropdown
+          label="Appareils"
+          options={uniqueAppliances}
+          selected={selectedAppliance}
+          onSelect={setSelectedAppliance}
+        />
 
-const handleSelectUstensil = (ustensil) => {
-  setSelectedUstensil(ustensil)
-}
+        <FilterDropdown
+          label="Ustensiles"
+          options={uniqueUstensils}
+          selected={selectedUstensil}
+          onSelect={setSelectedUstensil}
+        />
+      </div>
 
-return (
-  <div className="flex gap-4">
-    <FilterDropdown 
-      label="Ingrédients"
-      options={uniqueIngredients}
-      selected={selectedIngredient}
-      onSelect={handleSelectIngredient}
-    />
-    
-    <FilterDropdown 
-      label="Appareils"
-      options={uniqueAppliances}
-      selected={selectedAppliance}
-      onSelect={handleSelectAppliance}
-    />
-    
-    <FilterDropdown 
-      label="Ustensiles"
-      options={uniqueUstensils}
-      selected={selectedUstensil}
-      onSelect={handleSelectUstensil}
-    />
-  </div>
-)
+      {/* Afficher les tags */}
+      <div className="flex gap-2 mt-4">
+        {selectedIngredient && (
+          <FilterTag
+            label={selectedIngredient}
+            onRemove={() => setSelectedIngredient('')}
+          />
+        )}
+
+        {selectedAppliance && (
+          <FilterTag
+            label={selectedAppliance}
+            onRemove={() => setSelectedAppliance('')}
+          />
+        )}
+
+        {selectedUstensil && (
+          <FilterTag
+            label={selectedUstensil}
+            onRemove={() => setSelectedUstensil('')}
+          />
+        )}
+      </div>
+    </div>
+  )
 }

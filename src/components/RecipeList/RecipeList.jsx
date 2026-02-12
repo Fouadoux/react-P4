@@ -45,19 +45,19 @@ import { useState, useEffect  } from "react"
                 <button
                     onClick={goToPreviousPage}
                     disabled={currentPage === 1}
-                    className="px-6 py-2 bg-[#FFD15B] rounded-lg font-manrope disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ffd970] transition"
+                    className="px-6 py-2 bg-[#FFD15B] rounded-lg font-manrope disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ffd970] transition text-black"
                 >
                     Précédent
                 </button>
 
-                <span className="font-manrope text-sm">
+                <span className="font-manrope text-sm text-black">
                     Page {currentPage} sur {totalPages}
                 </span>
 
                 <button
                     onClick={goToNextPage}
                     disabled={currentPage === totalPages}
-                    className="px-6 py-2 bg-[#FFD15B] rounded-lg font-manrope disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ffd970] transition"
+                    className="px-6 py-2 bg-[#FFD15B] rounded-lg font-manrope disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ffd970] transition text-black"
                 >
                     Suivant
                 </button>

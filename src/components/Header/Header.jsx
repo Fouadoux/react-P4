@@ -1,14 +1,9 @@
 import Image from "next/image";
 import SearchBar from "../SearchBar/SearchBar";
-import { anton } from '@/app/fonts'  
 
-export default function Header() {
-
-
-
+export default function Header({ searchTerm, setSearchTerm }) {
   return (
     <header className="relative w-[1440px] h-[667px] flex justify-center mx-auto">
-
       {/* Image de fond */}
       <div className="absolute inset-0 w-full h-full">
         <Image
@@ -19,7 +14,7 @@ export default function Header() {
           className="object-cover"
         />
       </div>
-
+      
       {/* Logos/icônes */}
       <div className="absolute z-20 flex flex-row items-center gap-4 left-[69px] top-[51px]">
         <Image
@@ -37,16 +32,17 @@ export default function Header() {
           className="object-contain"
         />
       </div>
-      <div className="absolute z-20 flex flex-row items-center left-[275px] top-[245px] ">
-        <p className={`${anton.className} text-center text-[44px] leading-[66px] text-[#FFD15B] font-bold`}>
+      
+      <div className="absolute z-20 flex flex-row items-center left-[275px] top-[245px]">
+        <p className="font-anton text-center text-[44px] leading-[66px] text-[#FFD15B] font-bold">
           DÉCOUVREZ NOS RECETTES<br />
-          DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES
+          DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
         </p>
       </div>
-      <div className="absolute z-20 flex flex-row items-center gap-4 left-[243px] top-[406px] ">
-        <SearchBar/>
-        </div>
+      
+      <div className="absolute z-20 flex flex-row items-center gap-4 left-[243px] top-[406px]">
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      </div>
     </header>
-
-  );
+  )
 }
