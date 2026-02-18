@@ -9,8 +9,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fr">
-      <body className={`${anton.variable} ${manrope.variable} antialiased`}>
+    <html lang="fr" className={`${anton.variable} ${manrope.variable}`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>

@@ -1,6 +1,7 @@
 "use client"
 import FilterDropdown from '@/components/FilterDropdown/FilterDropdown'
 import FilterTag from '@/components/FilterTag/FilterTag'
+import { capitalize } from '@/utils/capitalize'
 
 export default function Filters({
   recipes,
@@ -11,14 +12,6 @@ export default function Filters({
   selectedUstensil,
   setSelectedUstensil
 }) {
-  // Fonction pour capitaliser
-  const capitalize = (str) => {
-    return str
-      .toLowerCase()
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ')
-  }
 
   // Ingrédients
   const allIngredients = recipes.flatMap(r =>
@@ -43,9 +36,9 @@ export default function Filters({
   )].sort()
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-8 py-6">
+    <div className="w-full max-w-360 mx-auto px-8 py-6">
       {/* Les 3 dropdowns */}
-      <div className="flex gap-4">
+      <div className="flex gap-16.25">
         <FilterDropdown
           label="Ingrédients"
           options={uniqueIngredients}
@@ -69,7 +62,7 @@ export default function Filters({
       </div>
 
       {/* Afficher les tags */}
-      <div className="flex gap-2 mt-4">
+      <div className="flex gap-16.25 mt-4">
         {selectedIngredient && (
           <FilterTag
             label={selectedIngredient}

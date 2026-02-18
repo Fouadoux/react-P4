@@ -19,7 +19,7 @@ export default function FilterDropdown({ label, options, selected, onSelect }) {
       {/* Bouton */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center justify-between px-4 py-[17px] w-[195px] h-[56px] bg-white font-manrope font-medium text-base text-[#1B1B1B] ${isOpen ? 'rounded-t-[11px]' : 'rounded-[11px]'
+        className={`flex items-center justify-between px-4 py-4.25 w-48.75 h-14 bg-white font-manrope font-medium text-base text-[#1B1B1B] ${isOpen ? 'rounded-t-[11px]' : 'rounded-[11px]'
           }`}
       >
         <span>{label}</span>
@@ -35,11 +35,11 @@ export default function FilterDropdown({ label, options, selected, onSelect }) {
 
       {/* Menu déroulant */}
       {isOpen && (
-        <div className="absolute top-[56px] left-0 w-[195px] bg-white rounded-b-[11px] shadow-[0px_4px_34px_30px_rgba(0,0,0,0.04)] max-h-60 overflow-y-auto z-10">
+        <div className="absolute top-14 left-0 w-48.75 bg-white rounded-b-[11px] shadow-[0px_4px_34px_30px_rgba(0,0,0,0.04)] max-h-60 overflow-y-auto z-10">
 
           {/* Container de la barre de recherche */}
           <div className="flex justify-center py-3 bg-white">
-            <div className="relative w-[163px] h-[36px]">
+            <div className="relative w-40.75 h-9">
               <input
                 type="text"
                 placeholder=""

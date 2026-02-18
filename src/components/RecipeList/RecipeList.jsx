@@ -33,8 +33,8 @@ import { useState, useEffect  } from "react"
         }
     }
     return (
-        <div className="w-full max-w-[1440px] mx-auto bg-gray-[#EDEDED] px-8 py-12">
-            <div className="grid grid-cols-3 gap-x-[48px] gap-y-[68px] justify-items-center">
+        <div className="w-full max-w-360 mx-auto bg-gray-[#EDEDED] px-8 py-12">
+            <div className="grid grid-cols-3 gap-x-12 gap-y-17 justify-items-center">
                 {currentRecipes.map((recipe) => (
                     <RecipeCard key={recipe.id} recipe={recipe} />
                 ))}
@@ -45,19 +45,19 @@ import { useState, useEffect  } from "react"
                 <button
                     onClick={goToPreviousPage}
                     disabled={currentPage === 1}
-                    className="px-6 py-2 bg-[#FFD15B] rounded-lg font-manrope disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ffd970] transition text-black"
+                    className="px-6 py-2 bg-[#FFD15B] rounded-lg font-[manrope] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ffd970] transition text-black"
                 >
                     Précédent
                 </button>
 
-                <span className="font-manrope text-sm text-black">
+                <span className="font-[manrope] text-sm text-black">
                     Page {currentPage} sur {totalPages}
                 </span>
 
                 <button
                     onClick={goToNextPage}
                     disabled={currentPage === totalPages}
-                    className="px-6 py-2 bg-[#FFD15B] rounded-lg font-manrope disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ffd970] transition text-black"
+                    className="px-6 py-2 bg-[#FFD15B] rounded-lg font-[manrope] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ffd970] transition text-black"
                 >
                     Suivant
                 </button>

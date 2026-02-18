@@ -2,9 +2,9 @@
 
 export default function FilterTag({ label, onRemove }) {
   return (
-    <div className="flex items-center justify-between gap-2 px-4 py-2 bg-[#FFD15B] rounded-full w-[195px] h-[59px]">
+    <div className="flex items-center justify-between gap-2 px-4 py-2 bg-[#FFD15B] rounded-[11px] w-48.75 h-14.75">
       {/* Le texte du tag */}
-      <span className="font-manrope text-sm text-[#1B1B1B]">
+      <span className="font-[manrope] text-sm text-[#1B1B1B]">
         {label}
       </span>
       
