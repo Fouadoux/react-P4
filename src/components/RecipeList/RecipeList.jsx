@@ -33,7 +33,7 @@ import { useState, useEffect  } from "react"
         }
     }
     return (
-        <div className="w-full max-w-360 mx-auto bg-gray-[#EDEDED] px-8 py-12">
+        <div className="w-full max-w-360 mx-auto bg-gray-[#EDEDED] px-18">
             <div className="grid grid-cols-3 gap-x-12 gap-y-17 justify-items-center">
                 {currentRecipes.map((recipe) => (
                     <RecipeCard key={recipe.id} recipe={recipe} />

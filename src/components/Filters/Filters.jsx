@@ -3,6 +3,16 @@ import FilterDropdown from '@/components/FilterDropdown/FilterDropdown'
 import FilterTag from '@/components/FilterTag/FilterTag'
 import { capitalize } from '@/utils/capitalize'
 
+/**
+ * Barre de filtres avec dropdowns et tags de sélection.
+ * @param {Object[]} recipes - Liste des recettes pour extraire les options.
+ * @param {string} selectedIngredient - Ingrédient sélectionné.
+ * @param {Function} setSelectedIngredient - Setter de l'ingrédient.
+ * @param {string} selectedAppliance - Appareil sélectionné.
+ * @param {Function} setSelectedAppliance - Setter de l'appareil.
+ * @param {string} selectedUstensil - Ustensile sélectionné.
+ * @param {Function} setSelectedUstensil - Setter de l'ustensile.
+ */
 export default function Filters({
   recipes,
   selectedIngredient,
@@ -13,76 +23,69 @@ export default function Filters({
   setSelectedUstensil
 }) {
 
-  // Ingrédients
-  const allIngredients = recipes.flatMap(r =>
-    r.ingredients.map(ing => ing.ingredient.trim())
-  )
+  /** @type {string[]} Ingrédients uniques triés */
   const uniqueIngredients = [...new Set(
-    allIngredients.map(ing => capitalize(ing))
+    recipes.flatMap(r => r.ingredients.map(ing => capitalize(ing.ingredient.trim())))
   )].sort()
 
-  // Appareils
-  const allAppliances = recipes.map(r => r.appliance.trim())
+  /** @type {string[]} Appareils uniques triés */
   const uniqueAppliances = [...new Set(
-    allAppliances.map(app => capitalize(app))
+    recipes.map(r => capitalize(r.appliance.trim()))
   )].sort()
 
-  // Ustensiles
-  const allUstensils = recipes.flatMap(r =>
-    r.ustensils.map(u => u.trim())
-  )
+  /** @type {string[]} Ustensiles uniques triés */
   const uniqueUstensils = [...new Set(
-    allUstensils.map(ust => capitalize(ust))
+    recipes.flatMap(r => r.ustensils.map(u => capitalize(u.trim())))
   )].sort()
 
   return (
-    <div className="w-full max-w-360 mx-auto px-8 py-6">
-      {/* Les 3 dropdowns */}
-      <div className="flex gap-16.25">
-        <FilterDropdown
-          label="Ingrédients"
-          options={uniqueIngredients}
-          selected={selectedIngredient}
-          onSelect={setSelectedIngredient}
-        />
+    <div className='flex flex-row justify-between w-full max-w-360 mx-auto px-28 items-center'>
+      <div>
+        {/* Les 3 dropdowns de filtres */}
+        <div className="flex gap-16.25">
+          <FilterDropdown
+            label="Ingrédients"
+            options={uniqueIngredients}
+            selected={selectedIngredient}
+            onSelect={setSelectedIngredient}
+          />
+          <FilterDropdown
+            label="Appareils"
+            options={uniqueAppliances}
+            selected={selectedAppliance}
+            onSelect={setSelectedAppliance}
+          />
+          <FilterDropdown
+            label="Ustensiles"
+            options={uniqueUstensils}
+            selected={selectedUstensil}
+            onSelect={setSelectedUstensil}
+          />
+        </div>
 
-        <FilterDropdown
-          label="Appareils"
-          options={uniqueAppliances}
-          selected={selectedAppliance}
-          onSelect={setSelectedAppliance}
-        />
-
-        <FilterDropdown
-          label="Ustensiles"
-          options={uniqueUstensils}
-          selected={selectedUstensil}
-          onSelect={setSelectedUstensil}
-        />
+        {/* Tags des filtres actifs - mt-4 seulement si un tag est affiché */}
+        <div className={`flex gap-24.5 ${selectedIngredient || selectedAppliance || selectedUstensil ? 'mt-4' : 'mt-0'}`}>
+          <div className="w-40.5">
+            {selectedIngredient && (
+              <FilterTag label={selectedIngredient} onRemove={() => setSelectedIngredient('')} />
+            )}
+          </div>
+          <div className="w-40.5">
+            {selectedAppliance && (
+              <FilterTag label={selectedAppliance} onRemove={() => setSelectedAppliance('')} />
+            )}
+          </div>
+          <div className="w-40.5">
+            {selectedUstensil && (
+              <FilterTag label={selectedUstensil} onRemove={() => setSelectedUstensil('')} />
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* Afficher les tags */}
-      <div className="flex gap-16.25 mt-4">
-        {selectedIngredient && (
-          <FilterTag
-            label={selectedIngredient}
-            onRemove={() => setSelectedIngredient('')}
-          />
-        )}
-
-        {selectedAppliance && (
-          <FilterTag
-            label={selectedAppliance}
-            onRemove={() => setSelectedAppliance('')}
-          />
-        )}
-
-        {selectedUstensil && (
-          <FilterTag
-            label={selectedUstensil}
-            onRemove={() => setSelectedUstensil('')}
-          />
-        )}
+      {/* Compteur de recettes filtrées */}
+      <div className='font-[anton] text-black flex justify-end text-[21px]'>
+        <p>{recipes.length} recettes</p>
       </div>
     </div>
   )
