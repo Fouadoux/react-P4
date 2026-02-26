@@ -36,10 +36,12 @@ src/
 │
 ├── components/
 │   ├── Header/
+│   ├── HeaderRecipePage/
 │   ├── Footer/
 │   ├── SearchBar/
 │   ├── RecipeCard/
 │   ├── RecipeList/
+│   ├── RecipePage/
 │   ├── Filters/
 │   ├── FilterDropdown/
 │   └── FilterTag/
