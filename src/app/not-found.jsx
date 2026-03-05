@@ -9,7 +9,7 @@ import Link from "next/link"
 export default function NotFound() {
   return (
     <>
-      <div className="w-full">
+      <div className="w-full min-h-screen">
         {/* Lien vers l'accueil sur tout le header */}
         <Link href="/">
           <header className="relative max-w-360 h-166.75 flex justify-center mx-auto">

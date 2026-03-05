@@ -1,4 +1,4 @@
-import HeaderRecipe from '@/components/Header-recipe/HeaderRecipe';
+import HeaderRecipe from '@/components/HeaderRecipePage/HeaderRecipe';
 import datas from '@/data/recipes.json'
 import { notFound } from 'next/navigation'
 import { use } from "react";

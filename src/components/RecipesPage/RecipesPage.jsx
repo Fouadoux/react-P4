@@ -12,9 +12,9 @@ import Footer from '@/components/Footer/Footer'
 export default function RecipesPage({ recipes }) {
 
   /** États des filtres actifs */
-  const [selectedIngredient, setSelectedIngredient] = useState('')
-  const [selectedAppliance, setSelectedAppliance] = useState('')
-  const [selectedUstensil, setSelectedUstensil] = useState('')
+  const [selectedIngredients, setSelectedIngredients] = useState([])
+  const [selectedAppliances, setSelectedAppliances] = useState([])
+  const [selectedUstensils, setSelectedUstensils] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
   /**
@@ -34,23 +34,26 @@ export default function RecipesPage({ recipes }) {
       if (!matchSearch) return false
     }
     // 2. Filtre par ingrédient
-    if (selectedIngredient !== '') {
-      const matchIngredient = recipe.ingredients.some(ing =>
-        ing.ingredient.toLowerCase() === selectedIngredient.toLowerCase()
+    if (selectedIngredients.length > 0) {
+      const matchIngredient = selectedIngredients.every(tag => 
+        recipe.ingredients.some(ing =>
+          ing.ingredient.toLowerCase() === tag.toLowerCase()
+        )
       )
       if (!matchIngredient) return false
     }
     // 3. Filtre par appareil
-    if (selectedAppliance !== '') {
-      const matchAppliance =
-        recipe.appliance.toLowerCase() === selectedAppliance.toLowerCase()
+    if (selectedAppliances.length > 0) {
+      const matchAppliance = selectedAppliances.every(tag =>
+        recipe.appliance.toLowerCase() === tag.toLowerCase())
       if (!matchAppliance) return false
     }
     // 4. Filtre par ustensile
-    if (selectedUstensil !== '') {
-      const matchUstensil = recipe.ustensils.some(u =>
-        u.toLowerCase() === selectedUstensil.toLowerCase()
-      )
+    if (selectedUstensils.length > 0) {
+      const matchUstensil = selectedUstensils.every(tag =>
+        recipe.ustensils.some(u =>
+          u.toLowerCase() === tag.toLowerCase()
+        ))
       if (!matchUstensil) return false
     }
     return true
@@ -58,16 +61,16 @@ export default function RecipesPage({ recipes }) {
 
   return (
     <>
-      <div className='flex flex-col gap-15'>
+      <div className=' flex flex-col gap-15'>
         <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <Filters
           recipes={filteredRecipes}
-          selectedIngredient={selectedIngredient}
-          setSelectedIngredient={setSelectedIngredient}
-          selectedAppliance={selectedAppliance}
-          setSelectedAppliance={setSelectedAppliance}
-          selectedUstensil={selectedUstensil}
-          setSelectedUstensil={setSelectedUstensil}
+          selectedIngredients={selectedIngredients}
+          setSelectedIngredients={setSelectedIngredients}
+          selectedAppliances={selectedAppliances}
+          setSelectedAppliances={setSelectedAppliances}
+          selectedUstensils={selectedUstensils}
+          setSelectedUstensils={setSelectedUstensils}
         />
         <RecipeList recipes={filteredRecipes} />
         <Footer />
