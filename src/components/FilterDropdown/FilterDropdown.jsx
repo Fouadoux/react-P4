@@ -78,11 +78,16 @@ export default function FilterDropdown({ label, options, selected, onSelect }) {
             <div
               key={option}
               onClick={() => {
-                onSelect(option)
-                setIsOpen(false)
-                setSearchTerm('')
-              }}
-              className={`px-4 py-3 cursor-pointer font-[manrope] text-sm text-[#1B1B1B] transition-colors ${selected === option ? 'bg-[#FFD15B] font-medium' : 'hover:bg-[#FFD15B]'}`}
+  if (selected.includes(option)) {
+    // déjà sélectionné → on retire
+    onSelect(option, true)
+  } else {
+    // pas encore sélectionné → on ajoute
+    onSelect(option, false)
+  }
+  setSearchTerm('')
+}}
+              className={`px-4 py-3 cursor-pointer font-[manrope] text-sm text-[#1B1B1B] transition-colors ${selected.includes(option) ? 'bg-[#FFD15B] font-medium' : 'hover:bg-[#FFD15B]'}`}
             >
               {option}
             </div>
@@ -90,7 +95,7 @@ export default function FilterDropdown({ label, options, selected, onSelect }) {
 
           {/* Message si aucun résultat */}
           {filteredOptions.length === 0 && (
-            <div className="px-4 py-3 text-gray-400 font-[manrope] text-sm">
+            <div className="px-4 py-3 text-black font-[manrope] text-sm">
               Aucun résultat
             </div>
           )}

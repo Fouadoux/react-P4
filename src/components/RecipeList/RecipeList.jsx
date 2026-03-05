@@ -32,8 +32,20 @@ import { useState, useEffect  } from "react"
             window.scrollTo({ top: 0, behavior: 'smooth' })
         }
     }
+
+if (!isClient) return null
+
+// Affichage si aucune recette trouvée
+if (recipes.length === 0) {
+  return (
+    <div className="flex justify-center items-center w-full max-w-360 mx-auto px-18 py-20">
+      <p className="font-[anton] text-center text-[44px]  text-gray-500">Aucune recette trouvée</p>
+    </div>
+  )
+}
+
     return (
-        <div className="w-full max-w-360 mx-auto bg-gray-[#EDEDED] px-18">
+        <div className="min-h-screen w-full max-w-360 mx-auto bg-gray-[#EDEDED] px-18">
             <div className="grid grid-cols-3 gap-x-12 gap-y-17 justify-items-center">
                 {currentRecipes.map((recipe) => (
                     <RecipeCard key={recipe.id} recipe={recipe} />

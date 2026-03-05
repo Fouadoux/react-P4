@@ -15,12 +15,12 @@ import { capitalize } from '@/utils/capitalize'
  */
 export default function Filters({
   recipes,
-  selectedIngredient,
-  setSelectedIngredient,
-  selectedAppliance,
-  setSelectedAppliance,
-  selectedUstensil,
-  setSelectedUstensil
+  selectedIngredients,
+  setSelectedIngredients,
+  selectedAppliances,
+  setSelectedAppliances,
+  selectedUstensils,
+  setSelectedUstensils
 }) {
 
   /** @type {string[]} Ingrédients uniques triés */
@@ -38,6 +38,22 @@ export default function Filters({
     recipes.flatMap(r => r.ustensils.map(u => capitalize(u.trim())))
   )].sort()
 
+  const addTag = (setter, current, value) => {
+    if (!current.includes(value)) setter([...current, value])
+  }
+
+  /**
+   * Retire un tag de la liste.
+   * @param {Function} setter
+   * @param {string[]} current
+   * @param {string} value
+   */
+  const removeTag = (setter, current, value) => {
+    setter(current.filter(tag => tag !== value))
+  }
+
+  const hasActiveTags = selectedIngredients.length > 0 || selectedAppliances.length > 0 || selectedUstensils.length > 0
+
   return (
     <div className='flex flex-row justify-between w-full max-w-360 mx-auto px-28 items-center'>
       <div>
@@ -46,40 +62,46 @@ export default function Filters({
           <FilterDropdown
             label="Ingrédients"
             options={uniqueIngredients}
-            selected={selectedIngredient}
-            onSelect={setSelectedIngredient}
-          />
+            selected={selectedIngredients}
+            onSelect={(value, isRemove) =>
+              isRemove
+                ? removeTag(setSelectedIngredients, selectedIngredients, value)
+                : addTag(setSelectedIngredients, selectedIngredients, value)
+            } />
           <FilterDropdown
             label="Appareils"
             options={uniqueAppliances}
-            selected={selectedAppliance}
-            onSelect={setSelectedAppliance}
+            selected={selectedAppliances}
+            onSelect={(value, isRemove) =>
+              isRemove
+                ? removeTag(setSelectedAppliances, selectedAppliances, value)
+                : addTag(setSelectedAppliances, selectedAppliances, value)
+            }
           />
           <FilterDropdown
             label="Ustensiles"
             options={uniqueUstensils}
-            selected={selectedUstensil}
-            onSelect={setSelectedUstensil}
-          />
+            selected={selectedUstensils}
+            onSelect={(value, isRemove) =>
+              isRemove
+                ? removeTag(setSelectedUstensils, selectedUstensils, value)
+                : addTag(setSelectedUstensils, selectedUstensils, value)
+            } />
         </div>
 
         {/* Tags des filtres actifs - mt-4 seulement si un tag est affiché */}
-        <div className={`flex gap-24.5 ${selectedIngredient || selectedAppliance || selectedUstensil ? 'mt-4' : 'mt-0'}`}>
-          <div className="w-40.5">
-            {selectedIngredient && (
-              <FilterTag label={selectedIngredient} onRemove={() => setSelectedIngredient('')} />
-            )}
-          </div>
-          <div className="w-40.5">
-            {selectedAppliance && (
-              <FilterTag label={selectedAppliance} onRemove={() => setSelectedAppliance('')} />
-            )}
-          </div>
-          <div className="w-40.5">
-            {selectedUstensil && (
-              <FilterTag label={selectedUstensil} onRemove={() => setSelectedUstensil('')} />
-            )}
-          </div>
+        <div className={`flex gap-x-16.25 gap-y-2 flex-wrap ${hasActiveTags ? 'mt-4' : 'mt-0'}`}>
+          {[
+            ...selectedIngredients.map(tag => ({ tag, setter: setSelectedIngredients, list: selectedIngredients })),
+            ...selectedAppliances.map(tag => ({ tag, setter: setSelectedAppliances, list: selectedAppliances })),
+            ...selectedUstensils.map(tag => ({ tag, setter: setSelectedUstensils, list: selectedUstensils })),
+          ].map(({ tag, setter, list }) => (
+            <FilterTag
+              key={tag}
+              label={tag}
+              onRemove={() => removeTag(setter, list, tag)}
+            />
+          ))}
         </div>
       </div>
 
