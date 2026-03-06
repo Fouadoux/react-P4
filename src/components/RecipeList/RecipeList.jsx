@@ -38,7 +38,7 @@ if (!isClient) return null
 // Affichage si aucune recette trouvée
 if (recipes.length === 0) {
   return (
-    <div className="flex justify-center items-center w-full max-w-360 mx-auto px-18 py-20">
+    <div className="min-h-screen flex justify-center  w-full max-w-360 mx-auto px-18 py-20">
       <p className="font-[anton] text-center text-[44px]  text-gray-500">Aucune recette trouvée</p>
     </div>
   )
@@ -53,7 +53,7 @@ if (recipes.length === 0) {
             </div>
 
 
-            <div className="flex justify-center items-center gap-4 mt-8">
+            <div className="min-h-screen flex justify-center items-end gap-4 mt-8">
                 <button
                     onClick={goToPreviousPage}
                     disabled={currentPage === 1}
