@@ -6,11 +6,9 @@ import RecipesPage from '@/components/RecipesPage/RecipesPage'
  */
 export default function Page() {
     return (
-        <div className='min-h-screen'>
         <>
             <RecipesPage recipes={datas} />
-        
         </>
-        </div>
+
     )
 }

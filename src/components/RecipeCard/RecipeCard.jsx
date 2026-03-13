@@ -7,9 +7,9 @@ import Link from 'next/link'
  */
 export default function RecipeCard({ recipe }) {
   return (
-    <Link href={`/recipe/${recipe.slug}`}>
-      <div className="relative w-95 h-182.75 bg-white shadow-[0px_4px_34px_30px_rgba(0,0,0,0.04)] rounded-[21px]">
 
+    <div className="relative w-95 h-182.75 bg-white shadow-[0px_4px_34px_30px_rgba(0,0,0,0.04)] rounded-[21px]">
+      <Link href={`/recipe/${recipe.slug}`}>
         {/* Image de la recette */}
         <div className="relative w-95 h-63.25">
           <Image
@@ -70,7 +70,8 @@ export default function RecipeCard({ recipe }) {
           </div>
 
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
+
   )
 }
