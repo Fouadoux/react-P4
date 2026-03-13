@@ -61,7 +61,7 @@ export default function RecipesPage({ recipes }) {
 
   return (
     <>
-      <div className='min-h-screen flex flex-col gap-15'>
+      <div className='min-h-screen flex flex-col gap-15 '>
         <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <Filters
           recipes={filteredRecipes}

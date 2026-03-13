@@ -38,14 +38,14 @@ if (!isClient) return null
 // Affichage si aucune recette trouvée
 if (recipes.length === 0) {
   return (
-    <div className="min-h-screen flex justify-center  w-full max-w-360 mx-auto px-18 py-20">
+    <div className=" flex justify-center  max-w-360 m-auto px-18 py-20">
       <p className="font-[anton] text-center text-[44px]  text-gray-500">Aucune recette trouvée</p>
     </div>
   )
 }
 
     return (
-        <div className="min-h-screen w-full max-w-360 mx-auto bg-gray-[#EDEDED] px-18">
+        <div className="w-full max-w-360 mx-auto bg-gray-[#EDEDED] px-18">
             <div className="grid grid-cols-3 gap-x-12 gap-y-17 justify-items-center">
                 {currentRecipes.map((recipe) => (
                     <RecipeCard key={recipe.id} recipe={recipe} />
@@ -53,7 +53,7 @@ if (recipes.length === 0) {
             </div>
 
 
-            <div className="min-h-screen flex justify-center items-end gap-4 mt-8">
+            <div className=" flex justify-center items-end gap-4 mt-8">
                 <button
                     onClick={goToPreviousPage}
                     disabled={currentPage === 1}
