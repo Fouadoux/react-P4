@@ -9,6 +9,10 @@ import { useState, useEffect  } from "react"
     useEffect(() => {
     setIsClient(true)
   }, [])
+
+  useEffect(() => {
+  setCurrentPage(1)
+}, [recipes])
   
   if (!isClient) return null
     const recipesPerPage = 9
